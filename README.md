@@ -35,8 +35,9 @@ By identifying high-risk individuals early, lifestyle changes and medical interv
 
 ---
 ## 🛠 Installation & Setup
-git clone https://github.com/your-username/heartwise-chd-prediction.git
-cd heartwise-chd-prediction
+git clone :
+https://github.com/your-username/heartwise-chd-prediction.git
+
 
 
 
