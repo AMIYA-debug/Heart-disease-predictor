@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>10-Year CHD Risk Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003366);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,248,255,0.9));
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #002244;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #003366;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1.5px solid #007BFF;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #0056b3;
+        }
+        .btn {
+            background: linear-gradient(90deg, #007BFF, #00aaff);
+            color: white;
+            padding: 14px 0;
+            width: 100%;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #0056b3, #007BFF);
+            transform: scale(1.05);
+        }
+        .result-message {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .risk {
+            background: #ffd6d6;
+            color: #c0392b;
+            border: 2px solid #c0392b;
+        }
+        .norisk {
+            background: #d6ffd6;
+            color: #008800;
+            border: 2px solid #008800;
+        }
+        .error-message {
+            background: #ffe3c3;
+            color: #af5c00;
+            border: 2px solid #ec9706;
+            text-align: center;
+            margin-bottom: 18px;
+            padding: 12px;
+            border-radius: 7px;
+            font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Predict Your 10-Year CHD Risk</h1>
+
+    {% if error_message %}
+    <div class="error-message">{{ error_message }}</div>
+    {% endif %}
+
+    {% if result is defined %}
+        {% if result == 1 %}
+            <div class="result-message risk">
+                &#10071; <strong>High 10-year risk of Coronary Heart Disease (CHD) detected.</strong><br>
+                Please consult with a healthcare professional for further evaluation and preventive care.
+            </div>
+        {% elif result == 0 %}
+            <div class="result-message norisk">
+                &#128153; <strong>Low 10-year risk of Coronary Heart Disease (CHD) detected.</strong><br>
+                Keep maintaining a healthy lifestyle and regular check-ups!
+            </div>
+        {% else %}
+            <div class="result-message">
+                <strong>Unable to determine risk. Please try again.</strong>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <form action="/predict" method="POST">
+        <label for="male">Gender</label>
+        <select id="male" name="male" required>
+            <option value="">Select Gender</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select>
+
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="1" max="120" required>
+
+        <label for="currentSmoker">Current Smoker</label>
+        <select id="currentSmoker" name="currentSmoker" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="cigsPerDay">Cigarettes per Day</label>
+        <input type="number" id="cigsPerDay" name="cigsPerDay" min="0" max="100" step="0.1" required>
+
+        <label for="BPMeds">On Blood Pressure Medication</label>
+        <select id="BPMeds" name="BPMeds" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="prevalentStroke">History of Stroke</label>
+        <select id="prevalentStroke" name="prevalentStroke" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="prevalentHyp">Hypertension</label>
+        <select id="prevalentHyp" name="prevalentHyp" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="diabetes">Diabetes</label>
+        <select id="diabetes" name="diabetes" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+
+        <label for="totChol">Total Cholesterol (mg/dL)</label>
+        <input type="number" id="totChol" name="totChol" min="0" max="500" step="0.1" required>
+
+        <label for="sysBP">Systolic Blood Pressure (mmHg)</label>
+        <input type="number" id="sysBP" name="sysBP" min="0" max="300" step="0.1" required>
+
+        <label for="diaBP">Diastolic Blood Pressure (mmHg)</label>
+        <input type="number" id="diaBP" name="diaBP" min="0" max="200" step="0.1" required>
+
+        <label for="BMI">Body Mass Index (BMI)</label>
+        <input type="number" id="BMI" name="BMI" min="10" max="60" step="0.01" required>
+
+        <label for="heartRate">Heart Rate (bpm)</label>
+        <input type="number" id="heartRate" name="heartRate" min="40" max="200" step="0.1" required>
+
+        <label for="glucose">Glucose (mg/dL)</label>
+        <input type="number" id="glucose" name="glucose" min="30" max="400" step="0.1" required>
+
+        <button type="submit" class="btn">Predict Risk</button>
+    </form>
+</div>
+</body>
+</html>
+
+

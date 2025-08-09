@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003366);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 950px;
+            margin: 60px auto;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,248,255,0.85));
+            backdrop-filter: blur(12px);
+            padding: 50px;
+            border-radius: 18px;
+            box-shadow: 0px 15px 50px rgba(0,0,0,0.5), 0px 0px 25px rgba(0,162,255,0.5);
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #002244;
+            font-size: 40px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 800;
+        }
+        h2 {
+            color: #003366;
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 17px;
+            color: #333;
+            line-height: 1.7;
+            text-align: justify;
+            font-weight: 600;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        ul li {
+            background: rgba(200, 230, 255, 0.6);
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #002244;
+            transition: transform 0.2s, background 0.3s;
+            font-weight: 700;
+        }
+        ul li:hover {
+            transform: translateX(5px);
+            background: rgba(180, 220, 255, 0.85);
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 40px;
+            background: linear-gradient(90deg, #007BFF, #00aaff);
+            color: white;
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #0056b3, #007BFF);
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HeartWise — Your Partner in Heart Health</h1>
+        <p>
+            Heart disease is one of the leading causes of illness worldwide, but early detection can save lives. HeartWise uses advanced machine learning algorithms to analyze your health data and provide quick, reliable predictions about your heart disease risk.
+        </p>
+
+        <h2>💊 How it works:</h2>
+        <p>
+            Simply input your health information such as age, blood pressure, cholesterol levels, and lifestyle habits, and our system will evaluate your risk factors. Within moments, you receive a personalized risk assessment with actionable insights to help you take control of your heart health.
+        </p>
+
+        <h2>🫀 Why choose HeartWise?</h2>
+        <p>
+            &#8226; Easy to use and accessible anytime, anywhere<br>
+            &#8226; Powered by the latest in AI and medical research<br>
+            &#8226; Confidential and secure data handling<br>
+            &#8226; Empower yourself with knowledge and make informed decisions
+        </p>
+
+        <h2>📝 What it checks:</h2>
+        <ul>
+            <li>Age & Gender</li>
+            <li>Smoking Habits & Cigarettes Per Day</li>
+            <li>Blood Pressure (Systolic & Diastolic)</li>
+            <li>Cholesterol Levels & Glucose</li>
+            <li>Body Mass Index (BMI)</li>
+            <li>Medical History (Diabetes, Stroke, Hypertension)</li>
+        </ul>
+
+        <div style="text-align:center;">
+            <!-- Use url_for to avoid hardcoding the path -->
+            <a href="{{ url_for('predict_datapoint') }}" class="btn">Go to Prediction Page</a>
+        </div>
+    </div>
+</body>
+</html>
+
