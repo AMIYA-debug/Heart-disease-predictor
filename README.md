@@ -35,10 +35,5 @@ By identifying high-risk individuals early, lifestyle changes and medical interv
 
 ---
 
-## 🛠️ Installation & Setup
 
-Clone the repository:
-## 🛠 Installation & Setup
-
-1️⃣ **Clone the repository**
 
